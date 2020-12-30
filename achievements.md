@@ -64,6 +64,7 @@ sidebar_link: true
   <div class="row">
   <div class="column">
     <img src="https://nirajkhatiwada.com.np/assets/images/acknowledgements/asrc.png" alt="Samsung" style="width:200px;height:200px;">
+    Top2 hacker at "Daraz Bug Bounty Program" by ASRC
   </div>
   <div class="column">
     <img src="https://bugv.io/static/uploads/2020/03/logo-footer.png" alt="bugv" style="width:180px;height:170px;">
