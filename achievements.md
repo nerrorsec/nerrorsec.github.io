@@ -72,3 +72,12 @@ sidebar_link: true
   </div>
 </div>
 </p>
+
+<p class="message">
+  <center><h2>Articles</h2></center>
+  <div class="row">
+  <div class="column">
+    Mentioned at: <a href="https://www.techpana.com/2020/56033/">TechPana</a>
+  </div>
+</div>
+</p>
