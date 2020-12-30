@@ -64,7 +64,10 @@ sidebar_link: true
   <div class="row">
   <div class="column">
     <img src="https://nirajkhatiwada.com.np/assets/images/acknowledgements/asrc.png" alt="Samsung" style="width:200px;height:200px;">
-    and more.
+  </div>
+  <div class="column">
+    <img src="https://bugv.io/static/uploads/2020/03/logo-footer.png" alt="bugv" style="width:200px;height:200px;">
+    Awarded "Most Creative Bug" at bugv Live hacking-1225
   </div>
 </div>
 </p>
