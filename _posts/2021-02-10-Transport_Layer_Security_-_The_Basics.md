@@ -15,7 +15,7 @@ Website owners can obtain certificates from a certificate authority that is resp
 
 ### Workflow
 
-![How SSL works](https://github.com/nerrorsec/nerrorsec.github.io/blob/master/assets/images/posts/Transport-Layer-Security/How-SSL-Works.png)
+<img src="https://raw.githubusercontent.com/nerrorsec/nerrorsec.github.io/master/assets/images/posts/Transport-Layer-Security/How-SSL-Works.png" alt="How SSL works?">
 
 Here, when you visit a website with SSL/TLS certificate installed, the browser sends a request to the server. The server responds with its SSL/TLS certificate including a public key. The browser then, checks the certificate and verifies if it the certificate has expired, been revoked and that it is communicating to the intended party and not an impostor. 
 
