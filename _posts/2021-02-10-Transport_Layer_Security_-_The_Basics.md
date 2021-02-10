@@ -14,7 +14,8 @@ Transport Layer Security (TLS) is the successor protocol to SSL that establishes
 Website owners can obtain certificates from a certificate authority that is responsible for issuing the certificates. The certificate authorities validates if the identity of the site you are interacting with is authentic and the certificate issued can confirm the domain and verify their identity. While anyone can create a certificate, browsers only trust certificates that come from an organization on their pre-installed list of trusted CAs. They can then install the certificate in their web server to implement it in their website. Use of an SSL certificate in a website can be verified with https:// at the start of the domain name in the URL bar and a padlock symbol in today’s browsers. 
 
 ### Workflow
-![](https://github.com/nerrorsec/nerrorsec.github.io/blob/master/assets/images/posts/Transport-Layer-Security/How-SSL-Works.png)
+
+![How SSL works](https://github.com/nerrorsec/nerrorsec.github.io/blob/master/assets/images/posts/Transport-Layer-Security/How-SSL-Works.png)
 
 Here, when you visit a website with SSL/TLS certificate installed, the browser sends a request to the server. The server responds with its SSL/TLS certificate including a public key. The browser then, checks the certificate and verifies if it the certificate has expired, been revoked and that it is communicating to the intended party and not an impostor. 
 
