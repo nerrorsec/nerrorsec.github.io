@@ -1,3 +1,13 @@
+---
+layout: post
+title: "Transport Layer Security - The Basics"
+categories:
+  - Blog
+tags:
+  - tls, ssl
+last_modified_at: 2021-02-10
+---
+
 Transport Layer Security (TLS) is the successor protocol to SSL that establishes an encrypted session between two computers on the Internet. TLS/SSL certificates are the backbone of internet security and it is what keeps our information safe while online. It encrypts and decrypts information between the client and the server while communicating with websites making sensitive information like banking details, account credentials, etc. inaccessible to any eavesdropper or any party between the client and the server. With the increasing use of personal and other critical data on the internet and actions like banking and shopping online, SSL has undergone multiple revisions to improve security and to mitigate attacks.
 
 ### How do you get an SSL/TLS certificate? 
