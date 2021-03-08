@@ -67,7 +67,7 @@ sidebar_link: true
     Top2 hacker at "Daraz Bug Bounty Program" by ASRC
   </div>
   <div class="column">
-    <img src="https://bugv.io/static/uploads/2020/03/logo-footer.png" alt="bugv" style="width:180px;height:170px;">
+    <img src="https://bugv.io/wp-content/uploads/2020/09/logo-footer-1.png" alt="bugv" style="width:180px;height:170px;">
     Awarded "Most Creative Bug" at bugv Live hacking-1225
   </div>
 </div>
