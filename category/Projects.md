@@ -1,5 +1,5 @@
 ---
 layout: category
-title: Projects
+title: 'Projects'
 permalink: '/posts/projects'
 ---
