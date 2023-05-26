@@ -17,7 +17,7 @@ background: '/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/thumbnail
     <li>Use one of the many intended features to get shell access to the container.</li>
 </ol>
 <img
-    src="https://github.com/nerrorsec/nerrorsec.github.io/tree/main/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/1.shodan%20search.png"
+    src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/1.shodan%20search.png"
     alt="" width="562" height="180" />
 <p></p>
 <p class="has-text-align-justify">Let's perform a Shodan search. We discover 500+ instances of reNgine installed on VPS
@@ -30,7 +30,7 @@ background: '/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/thumbnail
     port is indeed open.</p>
 <br>
 <img
-    src="https://github.com/nerrorsec/nerrorsec.github.io/tree/main/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/5.%20postgres%20cmd.png"
+    src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/5.%20postgres%20cmd.png"
     alt="" width="358" height="112" />
 
 <p></p>
@@ -42,7 +42,7 @@ background: '/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/thumbnail
     credentials for reNgine. If we view the data in the table, we can see useful information such as username and
     password that provides access to the reNgine dashboard. However, the password is encrypted. </p>
 <img
-    src="https://github.com/nerrorsec/nerrorsec.github.io/tree/main/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/7.%20login%20user%20default.png"
+    src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/7.%20login%20user%20default.png"
     alt="" />
 
 <p class="has-text-align-justify">As reNgine is an open source project, we know how the hashing works here and maybe we
@@ -51,14 +51,14 @@ background: '/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/thumbnail
     add a user named 'info' with password '<em><strong>qazwsx</strong></em>' which is encrypted using the same hashing
     algorithm that the reNgine uses. </p>
 <img
-    src="https://github.com/nerrorsec/nerrorsec.github.io/tree/main/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/8.%20user%20insert.png"
+    src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/8.%20user%20insert.png"
     alt="" width="840" height="96" />
 
 <p class="has-text-align-justify">If we see the data from the table again, we can see a new user has been added with
     highest level of privileges.</p>
 <p class="has-text-align-justify">Now, we can login to the reNgine dashboard with the new credentials.</p>
 <img
-    src="https://github.com/nerrorsec/nerrorsec.github.io/tree/main/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/10.%20logging%20in.png"
+    src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/10.%20logging%20in.png"
     alt="" width="354" height="355" />
 
 <p class="has-text-align-justify">Can we do more? Yes, we can. We can use one of the intended feature of reNgine to get
@@ -70,12 +70,12 @@ background: '/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/thumbnail
 <p class="has-text-align-justify">Then, listen for an incoming connection and click on "Check Update" button for the
     custom tool. We have a shell access now. This in itself is not a vulnerability in reNgine but an intended feature.
     Here is a walkthrough video to get the reverse shell.</p>
-<iframe width="780" height="438" src="https://www.youtube.com/embed/po7fUeXY-Ww" title="reNgine shell access"
+<center><iframe width="780" height="438" src="https://www.youtube.com/embed/po7fUeXY-Ww" title="reNgine shell access"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen></iframe>
+    allowfullscreen></iframe><center>
 
-<h3 Recommendations</h3>
+<h3>Recommendations</h3>
 <ul>
 <li>Do not use default passwords.</li>
 <li>Do not expose unnecessary ports to the internet.</li>
