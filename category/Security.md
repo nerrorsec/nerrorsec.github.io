@@ -1,5 +1,5 @@
 ---
 layout: category
-title: /posts/security-research
-permalink: '/posts/security'
+title: Security Research
+permalink: '/category/security'
 ---
