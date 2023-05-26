@@ -1,5 +1,5 @@
 ---
 layout: category
-title: Security Research
+title: 'Security Research'
 permalink: '/posts/security'
 ---
