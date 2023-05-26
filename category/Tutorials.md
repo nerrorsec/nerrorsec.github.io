@@ -1,5 +1,5 @@
 ---
 layout: category
-title: Tutorials
-permalink: '/category/tutorials'
+title: 'Tutorials'
+permalink: '/posts/tutorials'
 ---
