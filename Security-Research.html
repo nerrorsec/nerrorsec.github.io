@@ -1,11 +1,11 @@
 ---
 layout: page
-permalink: /posts/php/
-title: Posts about "PHP"
+permalink: /posts/security-research/
+title: Security Research
 ---
 
 <div class="posts">
-  {% for post in site.categories['PHP'] %}
+  {% for post in site.categories['security-research'] %}
     <article class="post">
       <h1>
           <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
@@ -13,12 +13,12 @@ title: Posts about "PHP"
       <div>
         <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
       </div>
-      <div class="entry">
+<!--       <div class="entry">
         {{ post.excerpt }}
       </div>
       <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">
           Read More
-      </a>
+      </a> -->
     </article>
   {% endfor %}
 </div>
