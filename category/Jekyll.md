@@ -1,5 +1,5 @@
 ---
 layout: category
 title: posts/jekyll
-permalink: '/category/jekyll'
+permalink: '/posts/jekyll'
 ---
