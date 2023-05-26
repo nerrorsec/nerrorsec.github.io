@@ -5,7 +5,7 @@ layout: page
 <ul class="posts-list">
   {% assign category = page.category | default: page.title %}
   {% for post in site.posts %}
-    {% if post.categories contains category %}
+<!--     {% if post.categories contains category %} -->
       <li>
         <h3>
           <a href="{{ site.baseurl }}{{ post.url }}">
