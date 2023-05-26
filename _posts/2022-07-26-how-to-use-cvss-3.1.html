@@ -1,0 +1,37 @@
+---
+layout: post
+title: "How to use CVSS 3.1"
+subtitle: 
+date: 2022-07-26
+categories: security-research
+background: '/img/posts/2022-07-26-how-to-use-cvss-3.1/thumbnail.png'
+---
+
+<p>Common Vulnerability Scoring System(CVSS) is a numerical representation of the severity of a software vulnerability on a scale of 0-10. The final CVSS score is determined by the sub-categories from the 8 categories of options. This is a simplified version of the specification document by FirstOrg.</p>
+<h2>Attack Vector</h2>
+<p>This metric reflects the context by which vulnerability exploitation is possible.</p>
+<figure><table><tbody><tr><td data-align="left">Network</td><td data-align="center">Remotely Exploitable <em>via the Internet.</em></td></tr><tr><td data-align="left">Adjacent</td><td data-align="center">Attack via same shared physical or logical network.<em> Example: Wi-Fi, Local IP subnet, Bluetooth</em></td></tr><tr><td data-align="left">Local</td><td data-align="center">Local access to system <em>via keyboard, console or remotely like SSH or relies on user interaction such as Social Engineering.</em></td></tr><tr><td data-align="left">Physical</td><td data-align="center">Requires physical interaction with the vulnerable component.</td></tr></tbody></table></figure>
+<h2>Attack Complexity</h2>
+<p>This metric describes the conditions beyond the attacker’s control that must exist in order to exploit the vulnerability.</p>
+<figure><table><tbody><tr><td data-align="left">High</td><td data-align="center">A successful attack depends on conditions beyond the attacker's control. <em>Example: knowledge on target environment and configuration is required, mitigation techniques should be bypassed</em>.</td></tr><tr><td data-align="left">Low</td><td data-align="center">The exploit do not rely on special conditions or configurations on a target environment.</td></tr></tbody></table></figure>
+<h2>Privileges Required</h2>
+<p>This metric describes the level of privileges an attacker must possess&nbsp;<em>before</em>&nbsp;successfully exploiting the vulnerability.</p>
+<figure><table><tbody><tr><td data-align="left">High</td><td data-align="center">Attacker is an authenticated/authorized with highest level of privileges. <em>Example: administrator</em></td></tr><tr><td data-align="left">Low</td><td data-align="center">Attacker is an authenticated/authorized with low level privileges.</td></tr><tr><td data-align="left">None</td><td data-align="center">Attacker is an unauthenticated/unauthorized user.</td></tr></tbody></table></figure>
+<h2>User Interaction</h2>
+<p>This metric determines whether the vulnerability can be exploited solely at the will of the attacker, or whether a separate user (or user-initiated process) must participate in some manner. Here, user is a target or an authorized personnel associated with a target.</p>
+<figure><table><tbody><tr><td data-align="left">Required</td><td data-align="center">&nbsp;Requires a user to take some action before the vulnerability can be exploited. <em>Example: opening a link</em> <em>or a file</em>.</td></tr><tr><td data-align="left">None</td><td data-align="center">The vulnerable system can be exploited without interaction from any user.</td></tr></tbody></table></figure>
+<h2>Scope</h2>
+<p>This metric captures whether a vulnerability in one vulnerable component impacts resources in components beyond its&nbsp;<em>security scope</em>.</p>
+<figure><table><tbody><tr><td data-align="left">Changed</td><td data-align="center">An exploited vulnerability can only affect resources managed by the same security authority. <em>Example: HTML Injection (the code runs in the context of the web application)</em></td></tr><tr><td data-align="left">Unchanged</td><td data-align="center">An exploited vulnerability can affect resources beyond the security scope managed by the security authority of the vulnerable component.<em> Example: Remote Command Execution on a web application (the command is executed on the web server)</em></td></tr></tbody></table></figure>
+<h2>Confidentiality</h2>
+<p>This metric measures the impact to the confidentiality of the information resources managed by a software component due to a successfully exploited vulnerability.</p>
+<figure><table><tbody><tr><td data-align="left">High</td><td data-align="center">Total loss of confidentiality.<em> Example: plain-text password</em></td></tr><tr><td data-align="left">Low</td><td data-align="center">Some loss of confidentiality. <em>Example: hashed password</em></td></tr><tr><td data-align="left">None</td><td data-align="center">No loss of confidentiality.</td></tr></tbody></table></figure>
+<h2>Integrity</h2>
+<p>This metric measures the impact to integrity (trustworthiness and veracity of information) of a successfully exploited vulnerability.</p>
+<figure><table><tbody><tr><td data-align="left">High</td><td data-align="center">Total loss of integrity. <em>Example: all files can be modified</em></td></tr><tr><td data-align="left">Low</td><td data-align="center">Some loss of integrity. <em>Example: limited modification of files</em></td></tr><tr><td data-align="left">None</td><td data-align="center">No loss of integrity. </td></tr></tbody></table></figure>
+<h2>Availability</h2>
+<p>This metric measures the impact to the availability of the impacted component resulting from a successfully exploited vulnerability.</p>
+<figure><table><tbody><tr><td data-align="left">High</td><td data-align="center">Total loss of availability. <em>Example: permanent service interruption (repeated exploitation do not count as High)</em></td></tr><tr><td data-align="left">Low</td><td data-align="center">Some loss of availability. <em>Example: temporary service interruption</em></td></tr><tr><td data-align="left">None</td><td data-align="center">No loss of availability. </td></tr></tbody></table></figure>
+<p>Lastly, CVSS score is always <strong>debatable </strong>and different in different people's mind.</p>
+<p>References:</p>
+<p><a href="https://www.first.org/cvss/specification-document">https://www.first.org/</a><a href="https://www.first.org/cvss/specification-document" target="_blank" rel="noreferrer noopener">cvss/specification-document</a></p>
