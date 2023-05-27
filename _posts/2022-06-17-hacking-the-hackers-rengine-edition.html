@@ -15,7 +15,7 @@ categories: [security-research]
         <li>Try to access reNgine database with default password.</li>
         <li>If successful, add a user and login to reNgine.</li>
         <li>Use one of the many intended features to get shell access to the container.</li>
-    </ol><p>
+    </ol></p>
     <img src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/1.shodan%20search.png" alt="" width="562"
         height="180" style="display: block; margin: 0 auto;" />
     <p>Let's perform a Shodan search. We discover 500+ instances of reNgine installed on VPS
@@ -28,7 +28,6 @@ categories: [security-research]
         height="112" style="display: block; margin: 0 auto;" />
     <p>Now, it is time to test if they are using the default credentials. So, we try to
     connect to the database with the default credential and we succeed. Now?
-
     The database has all the information you see on the reNgine dashboard, stored in
     different tables. Among the tables is <strong><em><code>auth_user</code></em> </strong>table which stores the login
     credentials for reNgine. If we view the data in the table, we can see useful information such as username and
