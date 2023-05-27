@@ -663,11 +663,15 @@
                 <p class="message__text">Congratulations! You have reached the end of the internet.</p>
             </div>
             <div class="error__nav e-nav">
-                <a href="" target="_blanck" class="e-nav__link"></a>
+                <a href="{{ site.url }}" target="_blank" class="e-nav__link"></a>
             </div>
         </div>
         <!-- END Content -->
-
+        <script>
+            setTimeout(function () {
+                window.location.href = "{{ site.url }}";
+            }, 5000);
+        </script>
     </section>
 </body>
 <!-- Code Credit: https://codepen.io/uiswarup/full/yLzypyY-->
