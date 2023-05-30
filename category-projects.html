@@ -10,8 +10,23 @@ background: '/img/bg-projects.jpg'
   {% for post in site.categories['projects'] %}
     <article class="post">
       <h1>
-          <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+          <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}
       </h1>
+        {% if post.subtitle %}
+        <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+        {% else %}
+        <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+        {% endif %}
+        </a>
+      <p class="post-meta">Posted by
+            {% if post.author %}
+            {{ post.author }}
+            {% else %}
+            {{ site.author }}
+            {% endif %}
+            on
+            {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}            
+      </p>
       <div>
         <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
       </div>
@@ -24,3 +39,4 @@ background: '/img/bg-projects.jpg'
     </article>
   {% endfor %}
 </div>
+=
