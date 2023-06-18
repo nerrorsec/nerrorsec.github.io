@@ -1,0 +1,111 @@
+---
+layout: post
+title: "NahamCon CTF 2023"
+subtitle: "Mobile Challenges"
+date: 2022-06-16
+background: '/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges.html/thumbnail.png'
+categories: [Tutorials]
+---
+<div class="blog-content">
+<p><a href="https://nahamcon.com/">NahamCon</a> is a free virtual offensive security conference and the CTF was a 48-hour competition that lasted between June 15th, 12:00 PM PDT - June 17th, 12:00 PM PDT. This post only covers the 5 Mobile category challenges in the CTF.</p>
+
+<h2>Fortune Teller</h2>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>Upon installing the application, I encountered a user interface featuring an input field and a "GUESS" button. Nothing much to see.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/1.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>I decompiled the application package. I stumbled upon a function named decrypt() and an encrypted file located within the application's resources. This finding hinted at the presence of an encryption mechanism employed by the application. The decrypt() function utilized the user's input as the key in the AES decryption process.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/2.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>Further, my attention was directed to to a string resource named correct_guess in the MainActivity file.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/3.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>I referred to the strings.xml file and used the value as the input in the application.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/4.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>It was indeed the way to get the flag.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/5.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+
+<h2>JNInjaspeak</h2>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p></p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+
+
+
+
+
+
+  
+
+</div>
