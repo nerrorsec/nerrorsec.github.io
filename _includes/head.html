@@ -40,6 +40,20 @@
  .post-preview>a>.post-subtitle {
    font-size: inherit
   }
+
+/*hopefully fixes image overflow*/
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  img {
+    max-width: calc(100vw - 20px);
+  }
+}
+
 </style>
+
   
 </head>
