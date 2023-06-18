@@ -21,8 +21,38 @@ categories: [Tutorials]
 <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/4.jpg" alt="" style="display: block; margin: 0 auto;" />
 <p>It was indeed the way to get the flag.</p>
 <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/5.jpg" alt="" style="display: block; margin: 0 auto;" />
-
+<br>
 <h2>JNInjaspeak</h2>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>Firstly, the uppercase letters JNI in the challenge name seemed to be suggest the use of Java Native Interface in the application. The application has not much to do in the user interface.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/1.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>I decompiled the application and noticed the following line of code in MainActivity. The application was loading a .so binary.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/2.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>The binary was available in the lib folder of the decompiled application. I ran strings command on the library file and the flag was right there.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/3.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<br>
+<h2>Nahamstagram</h2>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p> The application opened a “Sign-In” page when executed. However, no credentials were provided so there was nothing to test.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/1.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>So, I jumped into the code and looked at the activities available for the application. There were a couple of exported activities on the application among which “SignUpActivity” felt like the right way to go. So, I opened the activity using ADB.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/2.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>The UI was not working properly and the sign-up request was not being sent to the server so, I looked further into the SignUpActivity and extracted the necessary parameters for sign-up request. </p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/3.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>The application was using Google Identity Toolkit API so I asked ChatGPT for the sign-up endpoint and signed up an account.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/4.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>Then, I signed in to the application and the user feed looked as follows.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/5.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>There was a feature to save drafts as well. My CTF experience tells me that the flag is surely on some user’s draft.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/6.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>As the application was using WebSocket to fetch posts and drafts, I looked through the WebSocket traffic and found a request that was fetching my drafts.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/7.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p>The first part of the request is the user ID, and this was available for other users too when their posts were being fetched for the user feed.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/8.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<p> I grabbed the user ID from one of the requests and send a request to fetch the user’s drafts hoping that it does not have proper authorization checks in place. And, sure enough it did not and the flag was retrieved.</p>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/9.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<br>
+<h2>Red Light Green Light</h2>
 <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
 <p></p>
 <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
@@ -44,42 +74,9 @@ categories: [Tutorials]
 <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
 <p></p>
 <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
+<br>
+<h2>Where's Waldo</h2>
+<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
 <p></p>
 <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
 <p></p>
