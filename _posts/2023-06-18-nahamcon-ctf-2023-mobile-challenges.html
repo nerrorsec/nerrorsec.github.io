@@ -45,35 +45,34 @@ categories: [Tutorials]
   <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/JNInjaspeak/3.jpg" alt="" style="display: block; margin: 0 auto;" />
   <br>
   <h3>Nahamstagram</h3>
-  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/0.jpg" alt="" style="display: block; margin: 0 auto;" />
-    <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/0.png" alt="" style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/0.png" alt="" style="display: block; margin: 0 auto;" />
   <p> The application opened a "Sign-In" page when executed. However, no credentials were provided so there was nothing
     to test.</p>
-  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/1.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/1.png" alt="" style="display: block; margin: 0 auto;" />
   <p>So, I jumped into the code and looked at the activities available for the application. There were a couple of
     exported activities on the application among which "SignUpActivity" felt like the right way to go. So, I opened the
     activity using ADB.</p>
-  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/2.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/2.png" alt="" style="display: block; margin: 0 auto;" />
   <p>The UI was not working properly and the sign-up request was not being sent to the server so, I looked further into
     the SignUpActivity and extracted the necessary parameters for sign-up request. </p>
-  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/3.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/3.png" alt="" style="display: block; margin: 0 auto;" />
   <p>The application was using Google Identity Toolkit API so I asked ChatGPT for the sign-up endpoint and signed up an
     account.</p>
   <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/4.jpg" alt="" style="display: block; margin: 0 auto;" />
   <p>Then, I signed in to the application and the user feed looked as follows.</p>
-  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/5.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/5.png" alt="" style="display: block; margin: 0 auto;" />
   <p>There was a feature to save drafts as well. My CTF experience tells me that the flag is surely on some user’s
     draft.</p>
-  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/6.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/6.png" alt="" style="display: block; margin: 0 auto;" />
   <p>As the application was using WebSocket to fetch posts and drafts, I looked through the WebSocket traffic and found
     a request that was fetching my drafts.</p>
-  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/7.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/7.png" alt="" style="display: block; margin: 0 auto;" />
   <p>The first part of the request is the user ID, and this was available for other users too when their posts were
     being fetched for the user feed.</p>
-  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/8.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/8.png" alt="" style="display: block; margin: 0 auto;" />
   <p> I grabbed the user ID from one of the requests and send a request to fetch the user’s drafts hoping that it does
     not have proper authorization checks in place. And, sure enough it did not and the flag was retrieved.</p>
-  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/9.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/9.png" alt="" style="display: block; margin: 0 auto;" />
   <br>
   <h3>Red Light Green Light</h3>
   <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/RLGL/0.jpg" alt="" width="562" height="180"
