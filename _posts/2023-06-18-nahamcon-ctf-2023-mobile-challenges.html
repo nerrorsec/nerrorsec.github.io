@@ -7,102 +7,103 @@ background: '/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges.html/thum
 categories: [Tutorials]
 ---
 <div class="blog-content">
-<p><a href="https://nahamcon.com/">NahamCon</a> is a free virtual offensive security conference and the CTF was a 48-hour competition that lasted between June 15th, 12:00 PM PDT - June 17th, 12:00 PM PDT. This post only covers the 5 Mobile category challenges in the CTF.</p>
-
-<h2>Fortune Teller</h2>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" style="display: block; margin: 0 auto;" />
-<p>Upon installing the application, I encountered a user interface featuring an input field and a "GUESS" button. Nothing much to see.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/1.jpg" alt="" style="display: block; margin: 0 auto;" />
-<p>I decompiled the application package. I stumbled upon a function named decrypt() and an encrypted file located within the application's resources. This finding hinted at the presence of an encryption mechanism employed by the application. The decrypt() function utilized the user's input as the key in the AES decryption process.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/2.jpg" alt="" style="display: block; margin: 0 auto;" />
-<p>Further, my attention was directed to to a string resource named correct_guess in the MainActivity file.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/3.jpg" alt="" style="display: block; margin: 0 auto;" />
-<p>I referred to the strings.xml file and used the value as the input in the application.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/4.jpg" alt="" style="display: block; margin: 0 auto;" />
-<p>It was indeed the way to get the flag.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/5.jpg" alt="" style="display: block; margin: 0 auto;" />
-<br>
-<h2>JNInjaspeak</h2>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>Firstly, the uppercase letters JNI in the challenge name seemed to be suggest the use of Java Native Interface in the application. The application has not much to do in the user interface.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/1.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>I decompiled the application and noticed the following line of code in MainActivity. The application was loading a .so binary.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/2.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>The binary was available in the lib folder of the decompiled application. I ran strings command on the library file and the flag was right there.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/3.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<br>
-<h2>Nahamstagram</h2>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p> The application opened a “Sign-In” page when executed. However, no credentials were provided so there was nothing to test.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/1.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>So, I jumped into the code and looked at the activities available for the application. There were a couple of exported activities on the application among which “SignUpActivity” felt like the right way to go. So, I opened the activity using ADB.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/2.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>The UI was not working properly and the sign-up request was not being sent to the server so, I looked further into the SignUpActivity and extracted the necessary parameters for sign-up request. </p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/3.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>The application was using Google Identity Toolkit API so I asked ChatGPT for the sign-up endpoint and signed up an account.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/4.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>Then, I signed in to the application and the user feed looked as follows.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/5.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>There was a feature to save drafts as well. My CTF experience tells me that the flag is surely on some user’s draft.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/6.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>As the application was using WebSocket to fetch posts and drafts, I looked through the WebSocket traffic and found a request that was fetching my drafts.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/7.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p>The first part of the request is the user ID, and this was available for other users too when their posts were being fetched for the user feed.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/8.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p> I grabbed the user ID from one of the requests and send a request to fetch the user’s drafts hoping that it does not have proper authorization checks in place. And, sure enough it did not and the flag was retrieved.</p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/9.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<br>
-<h2>Red Light Green Light</h2>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<br>
-<h2>Where's Waldo</h2>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-<p></p>
-<img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/" alt="" width="562" height="180" style="display: block; margin: 0 auto;" />
-
-
-
-
-
-
-  
-
+  <p><a href="https://nahamcon.com/">NahamCon</a> is a free virtual offensive security conference and the CTF was a
+    48-hour competition that lasted between June 15th, 12:00 PM PDT - June 17th, 12:00 PM PDT. This post only covers the
+    5 Mobile category challenges in the CTF.</p>
+  <h3>Fortune Teller</h3>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt=""
+    style="display: block; margin: 0 auto;" />
+  <p>Upon installing the application, I encountered a user interface featuring an input field and a "GUESS" button.
+    Nothing much to see.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/1.jpg" alt=""
+    style="display: block; margin: 0 auto;" />
+  <p>I decompiled the application package. I stumbled upon a function named decrypt() and an encrypted file located
+    within the application's resources. This finding hinted at the presence of an encryption mechanism employed by the
+    application. The decrypt() function utilized the user's input as the key in the AES decryption process.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/2.jpg" alt=""
+    style="display: block; margin: 0 auto;" />
+  <p>Further, my attention was directed to to a string resource named correct_guess in the MainActivity file.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/3.jpg" alt=""
+    style="display: block; margin: 0 auto;" />
+  <p>I referred to the strings.xml file and used the value as the input in the application.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/4.jpg" alt=""
+    style="display: block; margin: 0 auto;" />
+  <p>It was indeed the way to get the flag.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/5.jpg" alt=""
+    style="display: block; margin: 0 auto;" />
+  <br>
+  <h3>JNInjaspeak</h3>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/0.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>Firstly, the uppercase letters JNI in the challenge name seemed to be suggest the use of Java Native Interface in
+    the application. The application has not much to do in the user interface.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/1.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>I decompiled the application and noticed the following line of code in MainActivity. The application was loading a
+    .so binary.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/2.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>The binary was available in the lib folder of the decompiled application. I ran strings command on the library file
+    and the flag was right there.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Fortune-Teller/3.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <br>
+  <h3>Nahamstagram</h3>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/0.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p> The application opened a “Sign-In” page when executed. However, no credentials were provided so there was nothing
+    to test.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/1.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>So, I jumped into the code and looked at the activities available for the application. There were a couple of
+    exported activities on the application among which “SignUpActivity” felt like the right way to go. So, I opened the
+    activity using ADB.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/2.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>The UI was not working properly and the sign-up request was not being sent to the server so, I looked further into
+    the SignUpActivity and extracted the necessary parameters for sign-up request. </p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/3.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>The application was using Google Identity Toolkit API so I asked ChatGPT for the sign-up endpoint and signed up an
+    account.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/4.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>Then, I signed in to the application and the user feed looked as follows.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/5.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>There was a feature to save drafts as well. My CTF experience tells me that the flag is surely on some user’s
+    draft.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/6.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>As the application was using WebSocket to fetch posts and drafts, I looked through the WebSocket traffic and found
+    a request that was fetching my drafts.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/7.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>The first part of the request is the user ID, and this was available for other users too when their posts were
+    being fetched for the user feed.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/8.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p> I grabbed the user ID from one of the requests and send a request to fetch the user’s drafts hoping that it does
+    not have proper authorization checks in place. And, sure enough it did not and the flag was retrieved.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Nahamstagram/9.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <br>
+  <h3>Red Light Green Light</h3>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/RLGL/0.jpg" alt="" width="562" height="180"
+    style="display: block; margin: 0 auto;" />
+  <p>The description of the challenge said to press the button when the light is green but it would not turn green at
+    all.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/RLGL/1.jpg" alt="" width="562" height="180"
+    style="display: block; margin: 0 auto;" />
+  <p>As always, I decompiled the application and found this piece of code. The value of the variable red is set to true
+    and there is a decrypt() function that runs only if the value of the red variable is not true.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/RLGL/2.jpg" alt="" width="562" height="180"
+    style="display: block; margin: 0 auto;" />
+  <p>Next, I wrote a simple frida script to change the value of red to false from true during runtime.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/RLGL/3.jpg" alt="" width="562" height="180"
+    style="display: block; margin: 0 auto;" />
+  <p>I hooked the script to the application and pressed the MOVE! button and the flag was retrieved.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/RLGL/4.jpg" alt="" width="562" height="180"
+    style="display: block; margin: 0 auto;" />
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/RLGL/5.jpg" alt="" width="562" height="180"
+    style="display: block; margin: 0 auto;" />
+  <br>
+  <h3>Where's Waldo</h3>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Wheres-Waldo/0.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>Upon installing and starting the application, it asked for location permission and when granted would display a
+    message as follows.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Wheres-Waldo/1.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>The network request looked as follows for the application. It was sending the latitude and longitude based on the
+    device location and respond how far Waldo is.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Wheres-Waldo/2.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>ChatGPT had something to say about it.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Wheres-Waldo/3.jpg" alt="" style="display: block; margin: 0 auto;" />
+  <p>This, however, did not work but was helpful in some way. After some trials and errors, the flag was retrieved.</p>
+  <img src="/img/posts/2023-06-18-nahamcon-ctf-2023-mobile-challenges/Wheres-Waldo/4.jpg" alt="" style="display: block; margin: 0 auto;" />
 </div>
