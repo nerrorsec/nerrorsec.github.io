@@ -11,30 +11,30 @@ categories: [security-research]
 <h2>The Genesis</h2>
 <p>
 A year ago, I had a plan to automate my whole bug bounty process, which was an ambitious project for me. This was just an idea, a thought on how to eliminate tedious tasks in reconnaissance and vulnerability discovery, as well as increase the overall efficiency of my approach to bug bounty. The first step was a straightforward script meant to automate the data collection and initial analysis, which were tedious but important components of the whole process. However, a few months later, the vision broadened, and the script transformed into a full-fledged framework with thousands of lines of code.
-
+</p><p>
 The framework was designed to include all stages of the bug bounty process, from the very first reconnaissance to the finding of critical vulnerabilities. This tool became a personal challenge. I went down the path of various programming languages, new libraries, and difficult problems, all to come up with a tool that would greatly help my bug bounty process.
 </p>
 
 <h2>The Evolution and Impact</h2>
 <p>
 The framework's transition from a basic script to a full-fledged tool was both difficult and successful. Each iteration of the script added new features and optimizations, allowing the framework to disclose amazing vulnerabilities on different projects; thus, its effectiveness was repeatedly proved.
-
+</p><p>
 On a personal level, this has been the most meaningful project for me in terms of programming skills. Each bug I fixed and each feature I added brought me a deeper understanding of software development and cybersecurity. I improved my coding skills, dependency management, and system development to be able to deal with the complexities of real-world environments. The project has also given me a new perspective on the importance of automation in scaling security efforts, a key challenge in the modern-day bug bounty process and security as a whole.
 </p>
 
 <h2>Challenges in Maintenance and Upkeep</h2>
 <p>
 Yet, as the framework kept expanding, the issues related to its maintenance also grew. Keeping the tool in sync with the latest security trends and technologies was a substantial time investment. I found myself doing more programming and development tasks, such as adding new features, optimizing existing ones, and debugging, than actual hacking. This refocusing was not what I had imagined at the beginning of the project.
-
+</p><p>
 Refining the tool became an obsession and displaced my original goal. The more intricate the framework became, the more it needed attention for maintenance. This maintenance load, in turn, was the main factor that took me away from the hands-on, investigative side of hacking that I enjoy the most. Instead of finding weaknesses and exploring new vectors, I was stuck in the coding and debugging cycle.
-
+</p><p>
 Furthermore, the pressure of keeping pace with third-party upgrades added another dimension of difficulty. An update to a third-party API or library meant something might break in the framework, requiring investigation and updates. This endless tempo allowed little space for the creative and exploratory aspects of hacking that were once the reasons for my involvement in the field.
 </p>
 
 <h2>Shifting Focus</h2>
 <p>
 Looking back at this journey, I’ve reached a point where, though the framework has been a helpful learning tool, my passion lies in manual hacking. The thrill of finding flaws through human intuition and the mental challenges involved in the process are what make me happy. While having a vast and intricate codebase is great, it started to become a distraction.
-
+</p><p>
 Consequently, I have resolved to end the development of the automation framework and redirect my energy to manual hacking. This transition will give me the opportunity to revisit the fundamental principles of cybersecurity that I adore: firsthand experiences with systems, the innovative thought process involved in finding vulnerabilities, and the thrill of solving intricate security problems. The knowledge and experience gained from developing and managing the framework will undoubtedly enrich my manual hacking activities, serving as a strong foundation of knowledge and technical expertise.
 </p> 
 </div>
