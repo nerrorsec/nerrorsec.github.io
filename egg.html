@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Easter Egg - Encrypted Download (Fixed)</title>
+    <style>
+        body {
+            font-family: system-ui, Segoe UI, Arial;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #0f1724;
+            color: #e6eef8
+        }
+
+        .card {
+            background: #071428;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .6);
+            width: min(760px, 95%);
+            display: grid;
+            grid-template-columns: 1fr 260px;
+            gap: 18px
+        }
+
+        h1 {
+            margin: 0 0 8px 0
+        }
+
+        p.lead {
+            color: #9fb0c8;
+            margin: 0
+        }
+
+        .egg {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: linear-gradient(180deg, #ffd166, #ffb347);
+            color: #072039;
+            font-weight: 700;
+            box-shadow: 0 8px 30px rgba(255, 169, 54, 0.12)
+        }
+
+        .side {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center
+        }
+
+        .hidden-message {
+            display: none;
+            margin-top: 12px
+        }
+
+        button {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer
+        }
+
+        .download-btn {
+            background: #ffd166;
+            color: #072039;
+            font-weight: 700
+        }
+
+        footer {
+            grid-column: 1/-1;
+            color: #9fb0c8;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 8px
+        }
+
+        @media (max-width:760px) {
+            .card {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <section>
+            <h1>Easter Egg Finder — Encrypted</h1>
+            <p class="lead">A secret file is stored encrypted inside this page. Press the button to decrypt and save it.
+            </p>
+            <p style="margin-top:12px;color:#9fb0c8">Decryption happens entirely in your browser.</p>
+        </section>
+
+        <aside class="side">
+            <div id="egg" class="egg" title="Click to reveal">🥚</div>
+            <div style="margin-top:8px" id="hint">Click the egg to reveal the secret.</div>
+
+            <div id="controls" class="hidden-message">
+                <div style="margin-top:12px">
+                    <button id="downloadBtn" class="download-btn" type="button">Download Secret File</button>
+                </div>
+                <div style="margin-top:10px;font-size:13px;color:#7d8f9f">Status: <span id="status">encrypted</span>
+                </div>
+            </div>
+        </aside>
+
+        <footer>Demo using Web Crypto API for client-side encryption/decryption</footer>
+    </main>
+
+    <script>
+        (async () => {
+            const PASSPHRASE = 'easter-egg-passphrase-2025';
+            const FILENAME = 'easter-secret.txt';
+            const FILETYPE = 'text/plain;charset=utf-8';
+            const secretText = `🎉 This could be a malicious executable file!\n`;
+
+            const PBKDF2_ITER = 100000;
+            const AES_ALGO = { name: 'AES-GCM', length: 256 };
+
+            // UI
+            const egg = document.getElementById('egg');
+            const controls = document.getElementById('controls');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const statusEl = document.getElementById('status');
+
+            // helpers
+            const te = new TextEncoder(), td = new TextDecoder();
+            const toB64 = buf => btoa(String.fromCharCode(...new Uint8Array(buf)));
+            const fromB64 = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+
+            async function deriveKey(pass, salt) {
+                const baseKey = await crypto.subtle.importKey('raw', te.encode(pass), 'PBKDF2', false, ['deriveKey']);
+                return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: PBKDF2_ITER, hash: 'SHA-256' }, baseKey, AES_ALGO, false, ['encrypt', 'decrypt']);
+            }
+
+            // Encrypt once on load
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await deriveKey(PASSPHRASE, salt);
+            const ciphertext = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, te.encode(secretText));
+
+            const c64 = toB64(ciphertext), iv64 = toB64(iv), salt64 = toB64(salt);
+            statusEl.textContent = 'encrypted';
+
+            // Reveal controls
+            egg.addEventListener('click', () => {
+                controls.style.display = 'block';
+                document.getElementById('hint').textContent = 'Now you can decrypt and download!';
+            });
+
+            // Decrypt on click
+            downloadBtn.addEventListener('click', async () => {
+                try {
+                    statusEl.textContent = 'decrypting...';
+                    const key2 = await deriveKey(PASSPHRASE, fromB64(salt64));
+                    const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: fromB64(iv64) }, key2, fromB64(c64));
+                    const plainText = td.decode(plainBuf);
+
+                    const blob = new Blob([plainText], { type: FILETYPE });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = FILENAME;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(url);
+
+                    statusEl.textContent = 'decrypted & downloaded!';
+                } catch (err) {
+                    console.error(err);
+                    statusEl.textContent = 'decryption failed';
+                    alert('Decryption failed!');
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>
